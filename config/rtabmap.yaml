@@ -1,0 +1,193 @@
+BRIEF:
+    Bytes: 32
+BRISK:
+    Octaves: 3
+    PatternScale: 1.0
+    Thresh: 30
+#Bayes:
+#    FullPredictionUpdate: false
+#    PredictionLC: 0.1 0.36 0.30 0.16 0.062 0.0151 0.00255 0.000324 2.5e-05 1.3e-06 4.8e-08 1.2e-09 1.9e-11 2.2e-13 1.7e-15 8.5e-18 2.9e-20 6.9e-23
+#    VirtualPlacePriorThr: 0.9
+#DbSqlite3:
+#    CacheSize: 10000
+#    InMemory: false
+#    JournalMode: 3
+#    Synchronous: 0
+#    TempStore: 2
+FAST:
+    Gpu: false
+    GpuKeypointsRatio: 0.05
+    NonmaxSuppression: true
+    Threshold: 30
+FREAK:
+    NOctaves: 4
+    OrientationNormalized: true
+    PatternScale: 22.0
+    ScaleNormalized: true
+GFTT:
+    BlockSize: 3
+    K: 0.04
+    MaxCorners: 400
+    MinDistance: 5
+    QualityLevel: 0.01
+    UseHarrisDetector: false
+#Kp:
+#    BadSignRatio: 0.2
+#    DetectorStrategy: 0
+#    DictionaryPath:
+#    IncrementalDictionary: true
+#    MaxDepth: 0.0
+#    NNStrategy: 1
+#    NewWordsComparedTogether: true
+#    NndrRatio: 0.9
+#    Parallelized: true
+#    RoiRatios: 0.03 0.03 0.04 0.04
+#    SubPixEps: 0.02
+#    SubPixIterations: 0
+#    SubPixWinSize: 3
+#    TfIdfLikelihoodUsed: true
+#    WordsPerImage: 200
+LccBow:
+    Force2D: false
+    InlierDistance: 0.02
+    Iterations: 150
+    MaxDepth: 5
+    MinInliers: 10
+LccIcp:
+    MaxDistance: 0.2
+    Type: 0 # [1: 3D, 2: 2D?]
+LccIcp2:
+    CorrespondenceRatio: 0.7
+    Iterations: 30
+    MaxCorrespondenceDistance: 0.1
+    VoxelSize: 0.05
+LccIcp3:
+    CorrespondenceRatio: 0.7
+    Decimation: 8
+    Iterations: 30
+    MaxCorrespondenceDistance: 0.05
+    MaxDepth: 4
+    PointToPlane: false
+    PointToPlaneNormalNeighbors: 20
+    Samples: 0
+    VoxelSize: 0.01
+LccReextract:
+    Activated: true
+    FeatureType: 4
+    MaxWords: 500
+    NNDR: 0.85
+    NNType: 3
+Mem:
+    BadSignaturesIgnored: false
+    BinDataKept: true
+    GenerateIds: true
+    ImageDecimation: 1
+    ImageKept: false
+    IncrementalMemory: true
+    InitWMWithAllNodes: false
+    LocalSpaceLinksKeptInWM: true
+    RecentWmRatio: 0.2
+    RehearsalIdUpdatedToNewOne: false
+    RehearsalSimilarity: 0.6
+    RehearsedNodesKept: true
+    STMSize: 10
+    TransferSortingByWeightId: false
+ORB:
+    EdgeThreshold: 31
+    FirstLevel: 0
+    Gpu: false
+    NFeatures: 200 # 400
+    NLevels: 8
+    PatchSize: 31
+    ScaleFactor: 1.2
+    ScoreType: 0
+    WTA_K: 2
+Odom:
+    FeatureType: 2 # [0=SURF 1=SIFT 2=ORB 3=FAST/FREAK 4=FAST/BRIEF 5=GFTT/FREAK 6=GFTT/BRIEF 7=BRISK.]
+    FillInfoData: true
+    Force2D: false
+    InlierDistance: 0.01
+    Iterations: 60
+    MaxDepth: 4.0
+    MaxFeatures: 200
+    MinInliers: 15
+    RefineIterations: 5
+    ResetCountdown: 0
+    RoiRatios: 0.0 0.0 0.0 0.0
+    Strategy: 0 # [0=Bag-of-words 1=Optical Flow]
+OdomBow:
+    LocalHistorySize: 1000
+    NNDR: 0.8
+    NNType: 3
+#OdomFlow:
+#    Eps: 0.01
+#    Iterations: 30
+#    MaxLevel: 3
+#    WinSize: 16
+#OdomSubPix:
+#    #Eps: 0.02
+#    Iterations: 0
+#    WinSize: 3
+RGBD:
+    AngularUpdate: 0.0
+    LinearUpdate: 0.0
+    Enabled: true
+    GoalReachedRadius: 0.5
+    LocalImmunizationRatio: 0.5
+    LocalLoopDetectionMaxDiffID: 50
+    LocalLoopDetectionNeighbors: 20
+    LocalLoopDetectionSpace: false
+    LocalLoopDetectionTime: true
+    LocalRadius: 10
+    MaxLocalRetrieved: 2
+    NewMapOdomChangeDistance: 4 # FIXME: does this work with map_optimiser?
+    OptimizeFromGraphEnd: true
+    OptimizeIterations: 1
+    OptimizeSlam2D: false
+    OptimizeStrategy: 0
+    OptimizeVarianceIgnored: false
+    PlanWithNearNodesLinked: true
+    PoseScanMatching: true
+Rtabmap:
+    WhitelistClosures: false
+    DetectionRate: 1
+    ImageBufferSize: 1
+    LoopRatio: 0.96
+    LoopThr: 0.15
+    MaxRetrieved: 2
+    MemoryThr: 0
+    PublishLastSignature: true
+    PublishLikelihood: true
+    PublishPdf: true
+    PublishStats: true
+    StartNewMapOnLoopClosure: false
+    StatisticLogged: false
+    StatisticLoggedHeaders: true
+    StatisticLogsBufferedInRAM: true
+    TimeThr: 700
+    VhStrategy: 1
+    WorkingDirectory: /home/yellow/.ros
+#SIFT:
+#    ContrastThreshold: 0.04
+#    EdgeThreshold: 10.0
+#    NFeatures: 0
+#    NOctaveLayers: 3
+#    Sigma: 1.6
+#SURF:
+#    Extended: false
+#    GpuKeypointsRatio: 0.01
+#    #GpuVersion: false
+#    HessianThreshold: 1000
+#    OctaveLayers: 2
+#    Octaves: 4
+#    Upright: false
+#Stereo:
+#    Eps: 0.01
+#    Iterations: 30
+#    MaxLevel: 3
+#    MaxSlope: 0.1
+#    WinSize: 16
+VhEp:
+    MatchCountMin: 8
+    RansacParam1: 3
+    RansacParam2: 0.99

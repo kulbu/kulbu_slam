@@ -1,0 +1,44 @@
+<launch>
+    <machine name="local_alt" address="localhost" default="true" />
+
+    <arg name="use_rat_odom"    default="true" />
+    <arg name="use_stereo_odom" default="false" />
+    <arg name="use_wheel_odom"  default="false" />
+    <arg name="use_cmdvel_odom" default="false" />
+
+    <arg name="use_rtab_lv" default="false" />
+    <arg name="use_rat_lv" default="true" />
+
+    <arg name="show_plot" default="false" />
+    <arg name="show_plot_distance" default="false" />
+
+    <node if="$(arg use_cmdvel_odom)" name="kulbu_gazebo_sim_odom" pkg="kulbu_gazebo" type="kulbu_gazebo_sim_odom" required="true">
+        <remap from="odom" to="/odometry/cmdvel_odometer"/>
+        <remap from="cmd_vel" to="/kulbu/cmd_vel"/>
+    </node>
+
+    <remap from="/ratslam/camera/image/compressed" to="/stereo_camera/left/image_raw/compressed"/>
+    <remap if="$(arg use_stereo_odom)" from="/ratslam/odom" to="/odometry/stereo_odometer"/>
+    <remap if="$(arg use_wheel_odom)"  from="/ratslam/odom" to="/odometry/wheel_odometer"/>
+    <remap if="$(arg use_cmdvel_odom)" from="/ratslam/odom" to="/odometry/cmdvel_odometer"/>
+
+    <node if="$(arg use_rtab_lv)" name="rtabmap_ratslam_lv" pkg="kulbu_gazebo" type="rtabmap_ratslam_lv" required="true">
+        <param name="queue_size"    type="int"      value="4"/>
+        <param name="LoopThr"       type="double"   value="0.15"/>
+        <param name="DistanceThr"   type="int"      value="10"/>
+    </node>
+    
+    <node if="$(arg use_rat_lv)" name="RatSLAMLocalViewCells" pkg="ratslam_ros" type="ratslam_lv" args="$(find kulbu_slam)/config/config_rattest.txt _image_transport:=compressed" cwd="node" required="true" />
+
+    <node name="RatSLAMPoseCells" pkg="ratslam_ros" type="ratslam_pc" args="$(find kulbu_gazebo)/config/config_rattest.txt _image_transport:=compressed" cwd="node" required="true" />
+    <node name="RatSLAMExperienceMap" pkg="ratslam_ros" type="ratslam_em" args="$(find kulbu_gazebo)/config/config_rattest.txt _image_transport:=compressed" cwd="node" required="true" />
+    
+    <node if="$(arg use_rat_odom)" name="RatSLAMVisualOdometry" pkg="ratslam_ros" type="ratslam_vo" args="$(find kulbu_gazebo)/config/config_rattest.txt _image_transport:=compressed" cwd="node" required="true" />
+
+    <node if="$(arg show_plot)" pkg="rqt_plot" type="rqt_plot" name="plot_vt_em" args="/ratslam/LocalView/Template/current_id,/ratslam/PoseCell/TopologicalAction/dest_id"/>
+
+    <node if="$(arg show_plot_distance)" pkg="rqt_plot" type="rqt_plot" name="plot_dm" args="/rtab_rat/DistanceMatrix/a,/rtab_rat/DistanceMatrix/b,/rtab_rat/DistanceMatrix/c,/rtab_rat/DistanceMatrix/d,/rtab_rat/DistanceMatrix/e,/rtab_rat/DistanceMatrix/f,/rtab_rat/DistanceMatrix/g,/rtab_rat/DistanceMatrix/h,/rtab_rat/DistanceMatrix/i"/>
+
+    <node if="$(arg show_plot_distance)" pkg="rqt_plot" type="rqt_plot" name="plot_dm_d_e" args="/rtab_rat/DistanceMatrix/calc1,/rtab_rat/DistanceMatrix/calc2"/>
+
+</launch>
