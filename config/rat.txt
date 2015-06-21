@@ -1,6 +1,6 @@
 [general]
 topic_root=ratslam
-                                                	
+
 [ratslam]
 image_crop_x_max=640
 image_crop_y_max=480
@@ -12,7 +12,7 @@ vt_step_match = 1
 vt_match_threshold = 0.03
 vt_active_decay = 0.5
 
-pc_dim_xy = 30
+pc_dim_xy = 80
 pc_vt_inject_energy = 0.15
 pc_cell_x_size = 0.015
 pc_vt_restore=0.04
@@ -32,7 +32,7 @@ vrot_image_x_max=475
 vrot_image_y_min=75
 vrot_image_y_max=240
 
-camera_fov_deg=113
+camera_fov_deg=62.8
 camera_hz = 20
 vtrans_scaling = 1000
 vtrans_max=20
